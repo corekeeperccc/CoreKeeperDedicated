@@ -3,7 +3,7 @@
 ###########################################################
 FROM cm2network/steamcmd:root
 
-LABEL maintainer="leandro.martin@protonmail.com"
+LABEL maintainer="your.email@example.com"
 
 ENV STEAMAPPID=1007
 ENV STEAMAPPID_TOOL=1963720
@@ -53,8 +53,8 @@ ENV PUID=1000 \
     DATA_PATH="${STEAMAPPDATADIR}" \
     MAX_PLAYERS=10 \
     SEASON="" \
-    SERVER_IP="" \
-    SERVER_PORT="" \
+    SERVER_IP="0.0.0.0" \
+    SERVER_PORT="2456" \
     DISCORD_WEBHOOK_URL="" \
     # Player Join
     DISCORD_PLAYER_JOIN_ENABLED=true \
@@ -83,4 +83,5 @@ WORKDIR ${HOMEDIR}
 # Use tini as the entrypoint for signal handling
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["bash", "scripts/entry.sh"]
+# Start the server and bind to 0.0.0.0
+CMD ["bash", "scripts/entry.sh", "-bind", "0.0.0.0"]
