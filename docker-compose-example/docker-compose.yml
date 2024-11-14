@@ -1,14 +1,15 @@
+version: '3.8'
+
 services:
   core-keeper:
     container_name: core-keeper-dedicated
     image: escaping/core-keeper-dedicated
+    ports:
+      - "2456:2456/udp"
     volumes:
-      - server-files:/home/steam/core-keeper-dedicated
-      - server-data:/home/steam/core-keeper-data
+      - ./server-files:/home/steam/core-keeper-dedicated
+      - ./server-data:/home/steam/core-keeper-data
     env_file:
       - ./core.env
     restart: always
     stop_grace_period: 2m
-volumes:
-    server-files:
-    server-data:
